@@ -5,6 +5,7 @@ import (
 	"context"
 
 	"github.com/jackc/pgx/v5"
+	"github.com/jackc/pgx/v5/pgconn"
 )
 
 func NewDB(ctx context.Context, connectionString string) DB {
@@ -21,4 +22,8 @@ func (d *dbImpl) Query(ctx context.Context, query string, args ...interface{}) (
 
 func (d *dbImpl) QueryRow(ctx context.Context, query string, args ...interface{}) pgx.Row {
 	return d.client.QueryRow(ctx, query, args...)
+}
+
+func (d *dbImpl) Exec(ctx context.Context, query string, args ...interface{}) (pgconn.CommandTag, error) {
+	return d.client.Exec(ctx, query, args...)
 }

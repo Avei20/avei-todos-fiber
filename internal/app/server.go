@@ -1,7 +1,7 @@
 package app
 
 import (
-	"avei-todos-fiber/internal/handler"
+	"avei-todos-fiber/internal/handler/todo"
 	"avei-todos-fiber/internal/router"
 	"fmt"
 	"os"
@@ -9,16 +9,18 @@ import (
 	"github.com/gofiber/fiber/v2"
 )
 
-func NewServer(handler *handler.Handler) *Server {
+func NewServer(
+	todoHandler todo.Handler,
+) *Server {
 	return &Server{
-		handler: handler,
+		todoHandler: todoHandler,
 	}
 }
 
 func (s *Server) InitRouteAndServe() {
-	r := fiber.New()
+	app := fiber.New()
 
-	r.Mount("/", router.InitRouter(s.handler))
+	app.Mount("/", router.InitRouter(s.handler))
 
 	port := os.Getenv("PORT")
 
@@ -27,5 +29,5 @@ func (s *Server) InitRouteAndServe() {
 	}
 
 	fmt.Printf("Server is running on port %s\n", port)
-	r.Listen(":" + port)
+	app.Listen(":" + port)
 }
