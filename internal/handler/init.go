@@ -6,6 +6,6 @@ func NewHandlers(
 	todoHandler todo.Handler,
 ) Handlers {
 	return Handlers{
-		todoHandler: todoHandler,
+		TodoHandler: &todoHandler,
 	}
 }

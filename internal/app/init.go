@@ -13,8 +13,8 @@ import (
 
 func InitHttp() *Server {
 	var (
-		db neon.DB
-		ctx context.Context
+		db               neon.DB
+		ctx              context.Context
 		connectionString string
 	)
 
@@ -37,7 +37,7 @@ func InitHttp() *Server {
 	// Handler
 	todoHandler := todoHandler.NewHandler(todoService)
 
-	serverHandler := handler.NewHandler()
+	serverHandler := handler.NewHandlers(todoHandler)
 	server := NewServer(serverHandler)
 	return server
 }

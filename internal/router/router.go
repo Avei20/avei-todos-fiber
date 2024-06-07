@@ -7,7 +7,7 @@ import (
 	"github.com/gofiber/fiber/v2"
 )
 
-func InitRouter(h *handler.Handler) *fiber.App {
+func InitRouter(h *handler.Handlers) *fiber.App {
 	router := fiber.New()
 
 	v1Router := v1.InitV1Router(h)
