@@ -3,7 +3,7 @@ package handler
 import "avei-todos-fiber/internal/handler/todo"
 
 type (
-	Handler interface {
+	Handlers interface {
 	}
 
 	HandlerImpl struct {

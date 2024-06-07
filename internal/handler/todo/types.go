@@ -3,7 +3,7 @@ package todo
 import (
 	"avei-todos-fiber/internal/service/todo"
 
-	"github.com/gofiber/fiber"
+	"github.com/gofiber/fiber/v2"
 )
 
 type (

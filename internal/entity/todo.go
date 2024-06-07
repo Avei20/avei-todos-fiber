@@ -1,3 +1,4 @@
+package entity
 
 type Todo struct {
 	Id        string  `json:"id" db:"id"`
