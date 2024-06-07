@@ -3,8 +3,8 @@ package app
 import (
 	"avei-todos-fiber/internal/handler"
 	todoHandler "avei-todos-fiber/internal/handler/todo"
+	todoRepository "avei-todos-fiber/internal/repository/database/todo"
 	"avei-todos-fiber/internal/repository/neon"
-	todoRepository "avei-todos-fiber/internal/repository/todo"
 	todoService "avei-todos-fiber/internal/service/todo"
 	"avei-todos-fiber/pkg/dotenv"
 	"context"

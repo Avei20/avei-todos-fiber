@@ -1,6 +1,6 @@
 package todo
 
-import "avei-todos-fiber/internal/repository/todo"
+import "avei-todos-fiber/internal/repository/database/todo"
 
 type (
 	Service     interface{}
