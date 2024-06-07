@@ -1,9 +1,7 @@
 package app
 
-import (
-	"avei-todos-fiber/internal/handler/todo"
-)
+import "avei-todos-fiber/internal/handler"
 
 type Server struct {
-	todoHandler todo.Handler
+	handlers handler.Handlers
 }

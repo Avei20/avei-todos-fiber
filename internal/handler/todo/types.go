@@ -2,8 +2,6 @@ package todo
 
 import (
 	"avei-todos-fiber/internal/service/todo"
-
-	"github.com/gofiber/fiber/v2"
 )
 
 type (
@@ -12,6 +10,5 @@ type (
 	}
 
 	Handler interface {
-		RegisterRoutes(router fiber.Router)
 	}
 )

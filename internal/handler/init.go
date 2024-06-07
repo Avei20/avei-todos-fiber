@@ -2,10 +2,10 @@ package handler
 
 import "avei-todos-fiber/internal/handler/todo"
 
-func NewHandler(
+func NewHandlers(
 	todoHandler todo.Handler,
-) Handler {
-	return &HandlerImpl{
+) Handlers {
+	return Handlers{
 		todoHandler: todoHandler,
 	}
 }

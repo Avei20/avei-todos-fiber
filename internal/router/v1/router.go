@@ -7,10 +7,10 @@ import (
 	"github.com/gofiber/fiber/v2"
 )
 
-func InitV1Router(h *handler.Handler) *fiber.App {
+func InitV1Router(h *handler.Handlers) *fiber.App {
 	v1Router := fiber.New()
 
-	v1Router.Mount("/todo", todo.InitRouter(h.todoHandler))
+	v1Router.Mount("/todo", todo.InitRouter(h.TodoHandler()))
 
 	return v1Router
 }

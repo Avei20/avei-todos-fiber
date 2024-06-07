@@ -1,7 +1,7 @@
 package app
 
 import (
-	"avei-todos-fiber/internal/handler/todo"
+	"avei-todos-fiber/internal/handler"
 	"avei-todos-fiber/internal/router"
 	"fmt"
 	"os"
@@ -10,17 +10,17 @@ import (
 )
 
 func NewServer(
-	todoHandler todo.Handler,
+	handlers handler.Handlers,
 ) *Server {
 	return &Server{
-		todoHandler: todoHandler,
+		handlers: handlers,
 	}
 }
 
 func (s *Server) InitRouteAndServe() {
 	app := fiber.New()
 
-	app.Mount("/", router.InitRouter(s.handler))
+	app.Mount("/", router.InitRouter(s.handlers))
 
 	port := os.Getenv("PORT")
 
