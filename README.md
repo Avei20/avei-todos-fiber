@@ -1,13 +1,20 @@
 ## Avei's Todo's Backend Clean Architecture
-html with markdown
-```html
-<a href="https://idx.google.com/import?url=https%3A%2F%2Fgithub.com%2FAvei20%2Favei-todos-fiber">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://cdn.idx.dev/btn/continue_dark_32.svg">
-    <source media="(prefers-color-scheme: light)" srcset="https://cdn.idx.dev/btn/continue_light_32.svg">
-    <img height="32" alt="Continue in IDX" src="https://cdn.idx.dev/btn/continue_purple_32.svg">
-  </picture>
-</a>
+
+Hi, this is my side project for handling my personal task. I create this to maximize my tasking on different project to keep all of my project stay in the line.
+
+The idea is simple, create a todo but every todos can have child and parent. Then they have a separated project. If i am not lazy, i will integrate this with google calendar api. So, the task will updated to google calendar.
+
+But, the main reason i built this is to managing my work and personal task. Espocially when i need to make a monthly report for my task. (I know i can use Jira, but just an over engineer xD).
+
+## Tech Stack
+Golang, Clean Architecure, Fiber, NO ORM BULLSHIT RAW QUERY IS THE WAY using pgx, Docker, Postgresql on Neon.
+
+## How to run
+```
+go run main.go
 ```
 
-This project is a simple todo's backend API that uses Clean Architecture principles. It was developed using Node.js, Express.js, and MongoDB.
+or build the docker images.
+
+### Deployment
+This application is deployed on Google Cloud Run. (All hail Cloud Run free tier. I Love U Google)
