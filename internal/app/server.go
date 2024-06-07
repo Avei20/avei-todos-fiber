@@ -20,7 +20,7 @@ func NewServer(
 func (s *Server) InitRouteAndServe() {
 	app := fiber.New()
 
-	app.Mount("/", router.InitRouter(s.handlers))
+	app.Mount("/", router.InitRouter(&s.handlers))
 
 	port := os.Getenv("PORT")
 

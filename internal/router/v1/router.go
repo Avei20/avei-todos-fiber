@@ -10,7 +10,7 @@ import (
 func InitV1Router(h *handler.Handlers) *fiber.App {
 	v1Router := fiber.New()
 
-	v1Router.Mount("/todo", todo.InitRouter(h.TodoHandler))
+	v1Router.Mount("/todo", todo.InitRouter(h))
 
 	return v1Router
 }

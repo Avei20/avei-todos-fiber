@@ -4,6 +4,6 @@ import "avei-todos-fiber/internal/handler/todo"
 
 type (
 	Handlers struct {
-		TodoHandler *todo.Handler
+		TodoHandler todo.Handler
 	}
 )
