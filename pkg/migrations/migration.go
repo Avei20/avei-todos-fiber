@@ -1,7 +1,7 @@
 package migrations
 
 import (
-	"log"
+	"fmt"
 	"os"
 
 	"github.com/golang-migrate/migrate/v4"
@@ -16,12 +16,14 @@ func Migrate() {
 	)
 
 	if err != nil {
-		log.Println("Error on migration new")
-		log.Fatal(err)
+		fmt.Println("Error on migration new")
+		panic(err)
 	}
 
 	if err := m.Up(); err != nil && err.Error() != "no change" {
-		log.Println("Error on migration up")
-		log.Fatal(err)
+		fmt.Println("Error on migration up")
+		panic(err)
 	}
+
+	fmt.Println("Migration completed")
 }

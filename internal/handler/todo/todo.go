@@ -1,6 +1,11 @@
 package todo
 
-import "github.com/gofiber/fiber/v2"
+import (
+	"avei-todos-fiber/internal/entity"
+	"log"
+
+	"github.com/gofiber/fiber/v2"
+)
 
 // CreateTodo godoc
 //
@@ -28,7 +33,27 @@ func (h *HandlerImpl) Create(c *fiber.Ctx) error {
 //	@Response		500	{object}	interface{}
 //	@Router			/v1/todos/ [get]
 func (h *HandlerImpl) Get(c *fiber.Ctx) error {
+	var (
+		todos []entity.Todo
+		err   error
+	)
+
+	// IF param null
+
+	todos, err = h.todoService.GetAll(c.Context())
+
+	if err != nil {
+		log.Println(err)
+		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
+			"success": false,
+			"message": "Gagal mengambil data todos!",
+			"data":    nil,
+		})
+	}
+
 	return c.JSON(fiber.Map{
-		"message": "Get todo",
+		"success": true,
+		"message": "Ini data semua todosnya ya bang!",
+		"data":    todos,
 	})
 }

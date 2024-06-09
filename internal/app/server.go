@@ -3,6 +3,7 @@ package app
 import (
 	"avei-todos-fiber/internal/handler"
 	"avei-todos-fiber/internal/router"
+	"avei-todos-fiber/pkg/dotenv"
 	"avei-todos-fiber/pkg/migrations"
 	"fmt"
 	"os"
@@ -60,7 +61,7 @@ func (s *Server) InitRouteAndServe() {
 	port := os.Getenv("PORT")
 
 	if port == "" {
-		port = "7009"
+		port = dotenv.GetEnv("PORT")
 	}
 
 	fmt.Printf("Server is running on port %s\n", port)
