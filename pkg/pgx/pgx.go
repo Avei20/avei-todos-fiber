@@ -16,8 +16,6 @@ func ConnectDB(ctx context.Context, connectionString string) *pgx.Conn {
 		os.Exit(1)
 	}
 
-	defer conn.Close(ctx)
-
 	err = conn.Ping(ctx)
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Unable to ping database %v\n", err)

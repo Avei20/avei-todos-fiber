@@ -6,17 +6,17 @@ import (
 	"log"
 )
 
-func (r *RepositoryImpl) Create(ctx context.Context, project entity.Project) (*entity.Project, error) {
+func (r *RepositoryImpl) Create(ctx context.Context, project *entity.Project) (*entity.Project, error) {
 	query := `INSERT
-		INTO projects (id, name, description, deleted)
-		VALUES ($1, $2, $3, false)`
+		INTO projects (id, name, description, deleted, code)
+		VALUES ($1, $2, $3, false, $4)`
 
-	rows, err := r.db.Query(ctx, query, project.Id, project.Name, project.Description)
+	rows, err := r.db.Exec(ctx, query, project.Id, project.Name, project.Description, project.Code)
 
 	log.Println(rows)
 	if err != nil {
 		return nil, err
 	}
 
-	return &project, nil
+	return project, nil
 }

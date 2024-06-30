@@ -1,4 +1,95 @@
 basePath: /
+definitions:
+  entity.Project:
+    properties:
+      code:
+        type: string
+      deleted:
+        type: boolean
+      description:
+        type: string
+      id:
+        type: string
+      name:
+        type: string
+    type: object
+  entity.Todo:
+    properties:
+      created_at:
+        type: string
+      deleted:
+        type: boolean
+      finish_at:
+        type: string
+      id:
+        type: string
+      is_done:
+        type: boolean
+      name:
+        type: string
+      parent_id:
+        type: string
+      project_id:
+        type: string
+    type: object
+  project.CreateBody:
+    properties:
+      code:
+        type: string
+      description:
+        type: string
+      name:
+        type: string
+    type: object
+  project.CreateResponse:
+    properties:
+      data:
+        $ref: '#/definitions/entity.Project'
+      message:
+        type: string
+      success:
+        type: boolean
+    type: object
+  project.GetAllResponse:
+    properties:
+      data:
+        items:
+          $ref: '#/definitions/entity.Project'
+        type: array
+      message:
+        type: string
+      success:
+        type: boolean
+    type: object
+  todo.CreateBody:
+    properties:
+      name:
+        type: string
+      parent_id:
+        type: string
+      project_id:
+        type: string
+    type: object
+  todo.CreateResponse:
+    properties:
+      data:
+        $ref: '#/definitions/entity.Todo'
+      message:
+        type: string
+      success:
+        type: boolean
+    type: object
+  todo.GetAllResponse:
+    properties:
+      data:
+        items:
+          $ref: '#/definitions/entity.Todo'
+        type: array
+      message:
+        type: string
+      success:
+        type: boolean
+    type: object
 host: localhost:7009
 info:
   contact: {}
@@ -6,18 +97,62 @@ info:
   title: Avei Todos API with Fiber and Clean Architecture
   version: "1.0"
 paths:
-  /v1/todos:
+  /v1/projects:
     post:
       consumes:
       - application/json
-      description: Create a todo
+      description: Create Project
+      parameters:
+      - description: Create Project
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/project.CreateBody'
       produces:
       - application/json
       responses:
         "201":
           description: Created
           schema:
-            type: object
+            $ref: '#/definitions/project.CreateResponse'
+      summary: Create Project
+      tags:
+      - Project
+  /v1/projects/:
+    get:
+      consumes:
+      - application/json
+      description: Get Project
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/project.GetAllResponse'
+      summary: Get Project
+      tags:
+      - Project
+  /v1/todos:
+    post:
+      consumes:
+      - application/json
+      description: Create a todo
+      parameters:
+      - description: Create Todo
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/todo.CreateBody'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/todo.CreateResponse'
       summary: Create a todo
       tags:
       - Todos
@@ -32,15 +167,7 @@ paths:
         "200":
           description: OK
           schema:
-            type: object
-        "404":
-          description: Not Found
-          schema:
-            type: object
-        "500":
-          description: Internal Server Error
-          schema:
-            type: object
+            $ref: '#/definitions/todo.GetAllResponse'
       summary: Get todo
       tags:
       - Todos

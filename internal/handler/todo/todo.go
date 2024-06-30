@@ -1,7 +1,7 @@
 package todo
 
 import (
-	"avei-todos-fiber/internal/entity"
+	"avei-todos-fiber/internal/service/todo"
 	"log"
 
 	"github.com/gofiber/fiber/v2"
@@ -14,10 +14,34 @@ import (
 //	@Tags			Todos
 //	@Accept			json
 //	@Produce		json
-//	@Success		201	{object}	interface{}
+//	@Param			body body todo.CreateBody true "Create Todo"
+//	@Success		201	{object}	todo.CreateResponse
 //	@Router			/v1/todos [post]
 func (h *HandlerImpl) Create(c *fiber.Ctx) error {
-	return nil
+	body := new(todo.CreateBody)
+	err := c.BodyParser(body)
+
+	if err != nil {
+		log.Println(err)
+		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
+			"success": false,
+			"message": "Gagal membuat todo!",
+			"data":    nil,
+		})
+	}
+
+	response, err := h.todoService.Create(c.Context(), body)
+
+	if err != nil {
+		log.Println(err)
+		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
+			"success": false,
+			"message": "Internal Server Error",
+			"data":    nil,
+		})
+	}
+
+	return c.JSON(response)
 }
 
 // GetTodo godoc
@@ -27,20 +51,16 @@ func (h *HandlerImpl) Create(c *fiber.Ctx) error {
 //	@Tags			Todos
 //	@Accept			json
 //	@Produce		json
-//	@Success		200	{object}	interface{}
-//	@Response		200	{object}	interface{}
-//	@Response		404	{object}	interface{}
-//	@Response		500	{object}	interface{}
+//	@Success		200	{object}	todo.GetAllResponse
 //	@Router			/v1/todos/ [get]
 func (h *HandlerImpl) Get(c *fiber.Ctx) error {
 	var (
-		todos []entity.Todo
-		err   error
+		err error
 	)
 
 	// IF param null
 
-	todos, err = h.todoService.GetAll(c.Context())
+	response, err := h.todoService.GetAll(c.Context())
 
 	if err != nil {
 		log.Println(err)
@@ -51,9 +71,5 @@ func (h *HandlerImpl) Get(c *fiber.Ctx) error {
 		})
 	}
 
-	return c.JSON(fiber.Map{
-		"success": true,
-		"message": "Ini data semua todosnya ya bang!",
-		"data":    todos,
-	})
+	return c.JSON(response)
 }

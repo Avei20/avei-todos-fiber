@@ -9,6 +9,7 @@ import (
 type (
 	Repository interface {
 		GetAll(ctx context.Context) ([]entity.Todo, error)
+		Create(ctx context.Context, todo *entity.Todo) (*entity.Todo, error)
 	}
 
 	RepositoryImpl struct {
