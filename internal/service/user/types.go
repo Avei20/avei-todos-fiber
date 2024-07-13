@@ -2,13 +2,18 @@ package user
 
 import (
 	"avei-todos-fiber/internal/entity"
+	"avei-todos-fiber/internal/repository/database/user"
 	"context"
 )
 
 type (
 	Service interface {
-		GetByUsername(ctx context.Context, username string) (*GetByUsernameResponse, error)
+		// GetByUsername(ctx context.Context, username string) (*GetByUsernameResponse, error)
 		Create(ctx context.Context, body *CreateBody) (*CreateResponse, error)
+	}
+
+	ServiceImpl struct {
+		repo user.Repository
 	}
 
 	CreateBody struct {
@@ -26,6 +31,6 @@ type (
 	CreateResponse struct {
 		Success bool         `json:"success"`
 		Message string       `json:"message"`
-		Data    *entity.User `json:"data"`
+		Data    entity.User `json:"data"`
 	}
 )

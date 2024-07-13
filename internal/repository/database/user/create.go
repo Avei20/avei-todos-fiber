@@ -10,7 +10,7 @@ func (r *RepositoryImpl) Create(ctx context.Context, user *entity.User) (*entity
 	INTO users (id, username, email, password)
 	VALUES ($1, $2, $3, $4)`
 
-	rows, err := r.db.Exec(
+	_, err := r.db.Exec(
 		ctx,
 		query,
 		user.Id,
