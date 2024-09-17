@@ -30,6 +30,9 @@ func (s *ServiceImpl) Create(ctx context.Context, body *CreateBody) (*CreateResp
 	var (
 		todo *entity.Todo
 	)
+
+	log.Print("%+v", body)
+
 	todoRaw := entity.Todo{
 		Id:        uuid.NewString(),
 		Name:      body.Name,

@@ -21,6 +21,7 @@ func (h *HandlerImpl) Create(c *fiber.Ctx) error {
 	body := new(todo.CreateBody)
 	err := c.BodyParser(body)
 
+	log.Printf("%+v", body)
 	if err != nil {
 		log.Println(err)
 		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{

@@ -12,6 +12,7 @@ import (
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/cors"
+	"github.com/gofiber/fiber/v2/middleware/logger"
 	"github.com/gofiber/swagger"
 )
 
@@ -27,6 +28,14 @@ func (s *Server) InitRouteAndServe() {
 	app := fiber.New()
 
 	app.Use(cors.New())
+
+	app.Use(logger.New(
+		logger.Config{
+			Format:     "${time} ${status} - ${method} ${path} \nBody: ${body}\nParams: ${queryParams}\n",
+			TimeFormat: "02-Jan-2024 13:04:05",
+			TimeZone:   "Asia/Jakarta",
+		},
+	))
 
 	// Run Migrations
 	migrations.Migrate()
